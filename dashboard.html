@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Pilotage Chantier</title>
+    <!-- Chargement de Chart.js pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background: #f1f5f9; margin: 0; padding: 25px; color: #1e293b; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px 30px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 25px; }
+        .header h1 { margin: 0; font-size: 22px; }
+        .header p { margin: 5px 0 0 0; color: #64748b; font-size: 14px; }
+
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
+        .card h3 { margin: 0 0 10px 0; font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card .value { font-size: 28px; font-weight: bold; color: #0284c7; }
+        .card .value.alert { color: #ef4444; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
+        @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        .panel { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .panel h2 { margin-top: 0; font-size: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        th { background: #f8fafc; color: #475569; }
+        .badge-red { background: #fee2e2; color: #b91c1c; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>
+            <h1 id="chantier-titre">Tableau de Bord de Suivi</h1>
+            <p id="export-date">Date de mise à jour : --</p>
+        </div>
+    </div>
+
+    <!-- 4 Cartes KPI Principales -->
+    <div class="cards">
+        <div class="card">
+            <h3>Avancement Global</h3>
+            <div id="kpi-global" class="value">0%</div>
+        </div>
+        <div class="card">
+            <h3>Jours Restants</h3>
+            <div id="kpi-restants" class="value">-</div>
+        </div>
+        <div class="card">
+            <h3>Tâches en Retard</h3>
+            <div id="kpi-retards" class="value alert">0</div>
+        </div>
+        <div class="card">
+            <h3>Entreprises Impliquées</h3>
+            <div id="kpi-entreprises" class="value">0</div>
+        </div>
+    </div>
+
+    <!-- 2 Graphiques interactifs -->
+    <div class="grid-2">
+        <div class="panel">
+            <h2>Avancement Moyen par Lot (%)</h2>
+            <canvas id="chartLots" height="200"></canvas>
+        </div>
+        <div class="panel">
+            <h2>Charge par Entreprise (Jours de travail cumulés)</h2>
+            <canvas id="chartCharge" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Tableau des Retards Détectés -->
+    <div class="panel">
+        <h2>Détail des Tâches en Retard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>N° Lot</th>
+                    <th>Code</th>
+                    <th>Désignation</th>
+                    <th>Entreprise</th>
+                    <th>Fin Prévue</th>
+                    <th>Retard Constaté</th>
+                    <th>Avancement</th>
+                    <th>Observations</th>
+                </tr>
+            </thead>
+            <tbody id="retards-body">
+                <!-- Injection via JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js.js">
+        
+    </script>
+</body>
+</html>
