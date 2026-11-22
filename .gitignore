@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets
+.env
+
+# Client data (Excel inputs and generated reports)
+data/*.xlsx
+data/*.xls
+output/*
+!output/.gitkeep
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
